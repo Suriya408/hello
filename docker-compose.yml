@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: springboot-hello-app
+    container_name: startimage
     ports:
       - "8080:8080"
     environment:
