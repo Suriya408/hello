@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: startimage
+    container_name: helloimage
     ports:
       - "8080:8080"
     environment:
