@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-app
+  template:
+    metadata:
+      labels:
+        app: hello-app
+    spec:
+      containers:
+        - name: hello-app
+          image: suriya408/exeimage:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-db:5432/hello_db
+            - name: SPRING_DATASOURCE_USERNAME
+              value: hello_user
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: hello_pass
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-app-service
+spec:
+  selector:
+    app: hello-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
